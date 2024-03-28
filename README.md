@@ -1,6 +1,4 @@
 # CAB302
 Assessment for CAB302 <br>
 Name: DROP TABLE<br>
-Members: Cooper Rose, Lachlan Ross, Alexander Cuciureanu
-<br>
-test
+Members: Cooper Rose, Lachlan Ross, Alexander Cuciureanu, Rushad Azad
