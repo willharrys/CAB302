@@ -41,4 +41,7 @@
             value="1.0"
             maxWidth="500"
     />
+    <Button fx:id= "NextPage"   text=" Next Page" onAction="#NextPageClick">
+
+    </Button>
 </VBox>
