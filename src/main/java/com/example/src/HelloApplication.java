@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
     //Defining the window title and size
     public static final String TITLE = "Journal App";
     public static final int WIDTH = 800;
-    public static final int HEIGHT = 750;
+    public static final int HEIGHT = 650;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
