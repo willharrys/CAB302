@@ -15,6 +15,8 @@ public class HelloController {
     private TextArea Clear;
     @FXML
     private Button Submit;
+    @FXML
+    private Button Resubmit;
 
 
     @FXML
@@ -22,5 +24,11 @@ public class HelloController {
        Submit.setText("Thanks for submitting!");
        Clear.clear();
 
+
+
+    }
+    @FXML
+    protected void ResubmitButtonClick(){
+        Submit.setText("Submit!");
     }
 }
