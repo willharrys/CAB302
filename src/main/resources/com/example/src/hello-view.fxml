@@ -28,5 +28,17 @@
     <Label text="Use the slider below to show how you are feeling on a scale from 1-10"
            style="-fx-font-size:24 "
     />
-    <Slider maxWidth="500"/>
+    <Slider fx:id="moodSlider"
+            blockIncrement="1.0"
+            cache="true"
+            majorTickUnit="1.0"
+            max="10.0"
+            min="1.0"
+            minorTickCount="0"
+            showTickLabels="true"
+            showTickMarks="true"
+            snapToTicks="true"
+            value="1.0"
+            maxWidth="500"
+    />
 </VBox>
