@@ -19,6 +19,7 @@
     <TextArea fx:id="Clear"
               wrapText="true"
               style="-fx-font-size:16"
+              maxWidth="300"
     />
     <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
     <Label text="Use the slider below to show how you are feeling on a scale from 1-10"

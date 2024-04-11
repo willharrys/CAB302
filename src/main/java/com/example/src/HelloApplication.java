@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
 
     //Defining the window title and size
     public static final String TITLE = "Journal App";
-    public static final int WIDTH = 1200;
+    public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
     @Override
     public void start(Stage stage) throws IOException {
