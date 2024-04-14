@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.src.StartController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <!-- Login Button -->
+    <Button text="Login" fx:id="loginButton" onAction="#handleLogin" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;"/>
+    <!-- Sign Up Button -->
+    <Button text="Sign Up" fx:id="signUpButton" onAction="#handleSignUp" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
+</VBox>

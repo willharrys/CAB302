@@ -1,12 +1,25 @@
 package com.example.src;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.sql.*;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class LoginController {
     @FXML
@@ -49,6 +62,8 @@ public class LoginController {
      * Handles the login button click event.
      * Checks if the provided username and password match a user in the database.
      */
+
+/*
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
@@ -64,12 +79,53 @@ public class LoginController {
                 if (resultSet.next()) {
                     String displayName = resultSet.getString("display_name");
                     messageLabel.setText("Welcome, " + displayName + "!");
+
+
                 } else {
                     messageLabel.setText("Invalid username or password!");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+ */
+    @FXML
+    private void handleLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        try {
+            String sql = "SELECT display_name FROM users WHERE username = ? AND password = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    String displayName = resultSet.getString("display_name");
+
+                    Parent root = FXMLLoader.load(getClass().getResource("homepage-view.fxml"));
+                    Scene scene = new Scene(root, 800, 650);
+                    Stage stage = (Stage) messageLabel.getScene().getWindow();
+                    stage.setHeight(650);
+                    stage.setWidth(800);
+                    stage.setScene(scene);
+                    stage.show();
+
+
+
+                    messageLabel.setText("Welcome, " + displayName + "!");
+                } else {
+                    messageLabel.setText("Invalid username or password!");
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            messageLabel.setText("Error connecting to the database.");
         }
     }
 
