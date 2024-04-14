@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         stage.getIcons().add(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNCnyiMs2nC5fTCEX6y0IWV6yoznFqLl-1qYMEkbodQ&s"));
         Scene scene = new Scene(fxmlLoader.load(),WIDTH, HEIGHT);
         stage.setTitle(TITLE);
