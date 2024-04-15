@@ -34,6 +34,8 @@ public class LoginController {
     private Button registerButton;
     @FXML
     private Label messageLabel;
+    @FXML
+    private Button registerClick;
 
     private Connection connection;
 
@@ -106,7 +108,7 @@ public class LoginController {
                 if (resultSet.next()) {
                     String displayName = resultSet.getString("display_name");
 
-                    Parent root = FXMLLoader.load(getClass().getResource("homepage-view.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
                     Scene scene = new Scene(root, 800, 650);
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
                     stage.setHeight(650);
@@ -158,5 +160,13 @@ public class LoginController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    protected void OnReturnClick()
+            throws IOException {
+        Stage stage = (Stage) registerClick.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-or-signup.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
     }
 }
