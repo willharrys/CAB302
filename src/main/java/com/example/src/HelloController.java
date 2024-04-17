@@ -23,6 +23,7 @@ public class HelloController {
     private Button NextPage;
 
 
+
     @FXML
     protected void onHelloButtonClick() {
        Submit.setText("Thanks for submitting!");
