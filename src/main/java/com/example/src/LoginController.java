@@ -108,7 +108,7 @@ public class LoginController {
                 if (resultSet.next()) {
                     String displayName = resultSet.getString("display_name");
 
-                    Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("homepage-view.fxml"));
                     Scene scene = new Scene(root, 800, 650);
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
                     stage.setHeight(650);

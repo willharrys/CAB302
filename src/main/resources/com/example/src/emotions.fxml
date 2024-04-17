@@ -7,9 +7,11 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<VBox fx:controller="com.example.src.MenuController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.geometry.Insets?>
+
+<VBox fx:controller="com.example.src.EmotionsController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
       style="-fx-background-color:moccasin">
-    <HBox>
+    <HBox style="-fx-padding:20">
         <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
                 style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"
         />
@@ -23,8 +25,54 @@
         />
     </HBox>
 
-    <Text text="Welcome to the Emotions sections" />
+    <HBox>
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
+            <Label  text="How are you feeling today?"
+                    style="-fx-font-size:18"/>
+            <TextArea fx:id="Clear"
+                      wrapText="true"
+                      style="-fx-font-size:14"
+                      maxWidth="300"
+                      maxHeight="400"
 
+            />
+            <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
+            <Button fx:id="Resubmit" text = "Resubmit!" onAction="#ResubmitButtonClick"/>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding:30">
+            <Label text="What emotions did you feel today?"
+                   style="-fx-font-size:18"/>
+            <TextArea fx:id="Clear2"
+                      wrapText="true"
+                      style="-fx-font-size:14"
+                      maxWidth="300"
+                      maxHeight="400"
+            />
+            <Button fx:id="Submit2" text = "Submit!" onAction="#onSubmitButtonClick"/>
+            <Button fx:id="Resubmit2"  text = "Resubmit!" onAction="#onResubmitButtonClick"/>
+        </VBox>
+
+    </HBox>
+
+    <VBox  alignment="CENTER" spacing="15" >
+    <Label text="Use the slider below to show how you are feeling on a scale from 1-10"
+           style="-fx-font-size:18 "
+    />
+    <Slider fx:id="moodSlider"
+            blockIncrement="1.0"
+            cache="true"
+            majorTickUnit="1.0"
+            max="10.0"
+            min="1.0"
+            minorTickCount="0"
+            showTickLabels="true"
+            showTickMarks="true"
+            snapToTicks="true"
+            value="1.0"
+            maxWidth="500"
+    />
+    </VBox>
 </VBox>
 
 
