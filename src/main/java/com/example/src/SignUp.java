@@ -88,6 +88,12 @@ public class SignUp {
         String password = passwordField.getText();
         String displayName = displayNameField.getText();
 
+        // Check if any field is empty
+        if (username.isEmpty() || password.isEmpty() || displayName.isEmpty()) {
+            System.out.println("Registration failed! All fields are required.");
+            return; // Exit the method early if any field is empty
+        }
+
         try {
             String sql = "INSERT INTO users (username, password, display_name) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -97,10 +103,8 @@ public class SignUp {
                 int rowsAffected = statement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    // Registration successful, display a success message
                     System.out.println("Registration successful!");
                 } else {
-                    // Registration failed, display an error message
                     System.out.println("Registration failed!");
                 }
             }
@@ -108,6 +112,7 @@ public class SignUp {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     protected void OnReturnClick()
