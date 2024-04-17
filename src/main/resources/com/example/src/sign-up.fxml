@@ -3,40 +3,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<!--
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.src.SignUp"
       alignment="CENTER" spacing="20"
       style="-fx-background-color: #f2f2f2; -fx-padding: 30;">
+-->
 
-    <!-- Text Field for Username -->
-    <TextField fx:id="usernameField" promptText="Username"
-               maxWidth="300" prefHeight="40"
-               style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.src.SignUp">
 
-    <!-- Password Field -->
-    <PasswordField fx:id="passwordField" promptText="Password"
-                   maxWidth="300" prefHeight="40"
-                   style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
+    <top>
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 10;">
+            <!-- Return Button -->
+            <Button fx:id="registerClick" text="Return" onAction="#OnReturnClick"
+                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
+                    maxWidth="Infinity" prefHeight="20"
+            />
+        </HBox>
+    </top>
 
-    <!-- Text Field for Display Name -->
-    <TextField fx:id="displayNameField" promptText="Display Name"
-               maxWidth="300" prefHeight="40"
-               style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: #f2f2f2; -fx-padding: 30;">
+            <!-- Text Field for Username -->
+            <TextField fx:id="usernameField" promptText="Username"
+                       maxWidth="300" prefHeight="40"
+                       style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
+            <!-- Password Field -->
+            <PasswordField fx:id="passwordField" promptText="Password"
+                           maxWidth="300" prefHeight="40"
+                           style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
 
-    <!-- Message Label -->
-    <Label fx:id="messageLabel"
-           style="-fx-text-fill: #d32f2f; -fx-font-size: 14px;"/>
+            <!-- Text Field for Display Name -->
+            <TextField fx:id="displayNameField" promptText="Display Name"
+                       maxWidth="300" prefHeight="40"
+                       style="-fx-font-size: 16px; -fx-padding: 4; -fx-background-radius: 5; -fx-background-color: #ffffff;"/>
 
-    <!-- Register Button -->
-    <Button fx:id="registerButton" text="Register" onAction="#handleRegister"
-            maxWidth="Infinity" prefHeight="40"
-            style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
-    />
-    <!-- Return Button -->
-    <Button fx:id="registerClick" text="Return" onAction="#OnReturnClick"
-            style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
-            maxWidth="Infinity" prefHeight="20"
-    />
+            <!-- Message Label -->
+            <Label fx:id="messageLabel"
+                   style="-fx-text-fill: #d32f2f; -fx-font-size: 14px;"/>
 
-</VBox>
+            <!-- Register Button -->
+            <Button fx:id="registerButton" text="Register" onAction="#handleRegister"
+                    maxWidth="350" prefHeight="50"
+                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
+            />
+        </VBox>
+    </center>
+</BorderPane>
