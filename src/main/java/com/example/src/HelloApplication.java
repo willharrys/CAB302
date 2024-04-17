@@ -17,7 +17,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
 
     //Defining the window title and size
-    public static final String TITLE = "Journal App";
+    public static final String TITLE = "Journal Reflection: Java Edition";
     public static final int WIDTH = 800;
     public static final int HEIGHT = 650;
 
