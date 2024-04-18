@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<VBox fx:controller="com.example.src.MenuController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
+<VBox fx:controller="com.example.src.SupportController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
       style="-fx-background-color:moccasin">
     <HBox>
         <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
@@ -24,5 +24,9 @@
     </HBox>
 
     <Text text="Welcome to the Support section" style="-fx-font-size:24" />
+
+    <Text text="Search for help (test for hyperlink)" style="-fx-font-size:24"/>
+    <Hyperlink text="Google" alignment="CENTER" onAction="#openLink" style="-fx-font-size:24"/>
+
 
 </VBox>
