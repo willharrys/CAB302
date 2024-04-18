@@ -17,6 +17,7 @@ public class MenuController {
     @FXML private Button homeMenu;
     @FXML private Button emotionMenu;
     @FXML private Button supportMenu;
+    @FXML private Button entryMenu;
     @FXML
     protected void homeMenuClick()
             throws IOException {
@@ -40,6 +41,16 @@ public class MenuController {
             throws IOException {
         Stage stage = (Stage) supportMenu.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("support.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
+
+    }
+
+    @FXML
+    protected void entryMenuClick()
+            throws IOException {
+        Stage stage = (Stage) entryMenu.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("entries.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
 

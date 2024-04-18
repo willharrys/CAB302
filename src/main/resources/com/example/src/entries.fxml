@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<VBox fx:controller="com.example.src.MenuController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
+<VBox fx:controller="com.example.src.EntryController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
       style="-fx-background-color:moccasin">
 
-<HBox>
     <HBox>
         <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
                 style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"
@@ -26,15 +27,10 @@
                 style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
 
     </HBox>
-</HBox>
-    <Text text="Welcome to our app!" style="-fx-font-size:24"/>
-    <VBox alignment="CENTER">
-        <ImageView>
-            <Image  url="https://theaggie.org/wp-content/uploads/2023/04/meditation_op_SUN_JOANNE_AGGIE-01-696x464.png"/>
-        </ImageView>
-    </VBox>
+
+    <Text text="Make an entry below (will add at a later date)" style="-fx-font-size:24"/>
+
+
 
 
 </VBox>
-
-
