@@ -27,6 +27,8 @@
 
     <Text text="Search for help (test for hyperlink)" style="-fx-font-size:24"/>
     <Hyperlink text="Google" alignment="CENTER" onAction="#openLink" style="-fx-font-size:24"/>
+    <Hyperlink text="Beyond Blue" alignment="CENTER" onAction="#openLink2" style="-fx-font-size:24"/>
+    <Hyperlink text="Kids Help Line" alignment="CENTER" onAction="#openLink3" style="-fx-font-size:24"/>
 
 
 </VBox>
