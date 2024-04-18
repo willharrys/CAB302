@@ -3,6 +3,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox fx:controller="com.example.src.MenuController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
       style="-fx-background-color:moccasin">
 
@@ -19,7 +21,13 @@
             style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"
     />
 </HBox>
-    <Text text="Welcome to our app!" style="-fx-text-size:24"/>
+    <Text text="Welcome to our app!" style="-fx-font-size:24"/>
+    <VBox alignment="CENTER">
+        <ImageView>
+            <Image  url="https://theaggie.org/wp-content/uploads/2023/04/meditation_op_SUN_JOANNE_AGGIE-01-696x464.png"/>
+        </ImageView>
+    </VBox>
+
 
 </VBox>
 

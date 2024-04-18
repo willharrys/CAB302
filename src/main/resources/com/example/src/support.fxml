@@ -23,6 +23,6 @@
         />
     </HBox>
 
-    <Text text="Welcome to the Support section" />
+    <Text text="Welcome to the Support section" style="-fx-font-size:24" />
 
 </VBox>
