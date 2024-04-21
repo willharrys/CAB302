@@ -19,6 +19,7 @@ public class MenuController {
     @FXML private Button emotionMenu;
     @FXML private Button supportMenu;
     @FXML private Button entryMenu;
+    @FXML private Button signOutMenu;
     @FXML private Label welcomeLabel;
 
     protected static int currentUserId;
@@ -71,6 +72,16 @@ public class MenuController {
             throws IOException {
         Stage stage = (Stage) entryMenu.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("entries.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
+
+    }
+
+    @FXML
+    protected void signOutMenuClick()
+            throws IOException {
+        Stage stage = (Stage) signOutMenu.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-or-signup.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
 
