@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
@@ -18,6 +19,13 @@ public class MenuController {
     @FXML private Button emotionMenu;
     @FXML private Button supportMenu;
     @FXML private Button entryMenu;
+    @FXML private Label welcomeLabel;
+
+    @FXML
+    public void setWelcomeMessage(String username, String userID){
+        welcomeLabel.setText("Welcome username: " + username + " userID: " + userID);
+    }
+
     @FXML
     protected void homeMenuClick()
             throws IOException {

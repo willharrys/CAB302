@@ -99,7 +99,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         try {
-            String sql = "SELECT display_name FROM users WHERE username = ? AND password = ?";
+            String sql = "SELECT display_name, userID FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
@@ -107,29 +107,32 @@ public class LoginController {
 
                 if (resultSet.next()) {
                     String displayName = resultSet.getString("display_name");
+                    String userID = resultSet.getString("userID");
 
-                    Parent root = FXMLLoader.load(getClass().getResource("homepage-view.fxml"));
-                    Scene scene = new Scene(root, 800, 650);
+                    // Correctly load and use FXMLLoader
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/homepage-view.fxml"));
+                    Parent root = loader.load();
+                    MenuController menuController = loader.getController();
+                    menuController.setWelcomeMessage(username, userID);
+
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
-                    stage.setHeight(650);
-                    stage.setWidth(800);
-                    stage.setScene(scene);
+                    stage.setScene(new Scene(root, 800, 650));
                     stage.show();
-
-
 
                     messageLabel.setText("Welcome, " + displayName + "!");
                 } else {
                     messageLabel.setText("Invalid username or password!");
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            messageLabel.setText("Failed to load user interface.");
         } catch (SQLException e) {
             e.printStackTrace();
             messageLabel.setText("Error connecting to the database.");
         }
     }
+
 
     /**
      * Handles the register button click event.
