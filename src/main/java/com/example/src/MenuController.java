@@ -29,11 +29,13 @@ public class MenuController {
 
     public static int getCurrentUserId() {
         return currentUserId;
+
     }
 
     @FXML
-    public void setWelcomeMessage(String username, String userID){
+    public void setWelcomeMessage(String username, int userID){
         welcomeLabel.setText("Welcome username: " + username + " userID: " + userID);
+        setCurrentUserId(userID);
     }
 
     @FXML
