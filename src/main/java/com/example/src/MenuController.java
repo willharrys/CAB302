@@ -21,6 +21,16 @@ public class MenuController {
     @FXML private Button entryMenu;
     @FXML private Label welcomeLabel;
 
+    protected static int currentUserId;
+
+    public static void setCurrentUserId(int userId) {
+        currentUserId = userId;
+    }
+
+    public static int getCurrentUserId() {
+        return currentUserId;
+    }
+
     @FXML
     public void setWelcomeMessage(String username, String userID){
         welcomeLabel.setText("Welcome username: " + username + " userID: " + userID);

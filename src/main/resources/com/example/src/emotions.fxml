@@ -54,7 +54,7 @@
         <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
             <Label  text="How are you feeling today?"
                     style="-fx-font-size:18"/>
-            <TextArea fx:id="Clear"
+            <TextArea fx:id="feelingsTextArea"
                       wrapText="true"
                       style="-fx-font-size:14"
 
@@ -64,13 +64,15 @@
             <!--
             <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
             -->
+            <!--
             <Button fx:id="Resubmit" text = "Resubmit!" onAction="#ResubmitButtonClick"/>
+            -->
         </VBox>
 
         <VBox alignment="CENTER" spacing="15" style="-fx-padding:30">
             <Label text="What emotions did you feel today?"
                    style="-fx-font-size:18"/>
-            <TextArea fx:id="Clear2"
+            <TextArea fx:id="emotionsTextArea"
                       wrapText="true"
                       style="-fx-font-size:14"
 
@@ -79,7 +81,9 @@
             <!--
             <Button fx:id="Submit2" text = "Submit!" onAction="#onSubmitButtonClick"/>
             -->
+            <!--
             <Button fx:id="Resubmit2"  text = "Resubmit!" onAction="#onResubmitButtonClick"/>
+            -->
         </VBox>
 
 
@@ -87,7 +91,7 @@
     </HBox>
     <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
 
-        <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
+        <Button fx:id="submitButton" text = "Submit!" onAction="#onSubmitButtonClick"/>
 
     </VBox>
 
