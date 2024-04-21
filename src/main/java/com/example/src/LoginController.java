@@ -109,7 +109,6 @@ public class LoginController {
                     String displayName = resultSet.getString("display_name");
                     String userID = resultSet.getString("userID");
 
-                    // Correctly load and use FXMLLoader
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/homepage-view.fxml"));
                     Parent root = loader.load();
                     MenuController menuController = loader.getController();

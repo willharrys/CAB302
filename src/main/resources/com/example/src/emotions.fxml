@@ -57,11 +57,13 @@
             <TextArea fx:id="Clear"
                       wrapText="true"
                       style="-fx-font-size:14"
-                      maxWidth="300"
+
                       maxHeight="400"
 
             />
+            <!--
             <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
+            -->
             <Button fx:id="Resubmit" text = "Resubmit!" onAction="#ResubmitButtonClick"/>
         </VBox>
 
@@ -71,14 +73,23 @@
             <TextArea fx:id="Clear2"
                       wrapText="true"
                       style="-fx-font-size:14"
-                      maxWidth="300"
+
                       maxHeight="400"
             />
+            <!--
             <Button fx:id="Submit2" text = "Submit!" onAction="#onSubmitButtonClick"/>
+            -->
             <Button fx:id="Resubmit2"  text = "Resubmit!" onAction="#onResubmitButtonClick"/>
         </VBox>
 
+
+
     </HBox>
+    <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
+
+        <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
+
+    </VBox>
 
 
 </VBox>
