@@ -28,7 +28,16 @@
 
     </HBox>
 
-    <Text text="Make an entry below (will add at a later date)" style="-fx-font-size:24"/>
+    <Text text="Entries" style="-fx-font-size:24"/>
+
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background-color:moccasin;">
+        <VBox fx:id="entriesList" spacing="10" style="-fx-padding: 10; -fx-background-color:moccasin;">
+            <!-- Entries will be dymaically adde nelow-->
+        </VBox>
+    </ScrollPane>
+
+
+
 
 
 
