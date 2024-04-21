@@ -109,7 +109,12 @@ public class SignUp {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                messageLabel.setText("Registration failed! Username already taken.");
+            } else {
+                messageLabel.setText("Database error: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
