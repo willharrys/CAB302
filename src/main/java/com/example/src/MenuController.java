@@ -45,6 +45,7 @@ public class MenuController {
         Stage stage = (Stage) homeMenu.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("homepage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+
         stage.setScene(scene);
 
     }

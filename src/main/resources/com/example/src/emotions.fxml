@@ -28,6 +28,9 @@
             <Button fx:id="supportMenu" text="Support" onAction="#supportMenuClick"
                     style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
 
+            <Button fx:id="signOutMenu" text="Sign Out" onAction="#signOutMenuClick"
+                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
+
         </HBox>
     </HBox>
 
