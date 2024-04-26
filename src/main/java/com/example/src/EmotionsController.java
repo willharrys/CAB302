@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,6 +39,9 @@ public class EmotionsController extends MenuController {
 
     private static final String DB_URL = "jdbc:sqlite:src/main/root/users.db";
     private static final String INSERT_SQL = "INSERT INTO entries (moodSlider, feelingsText, emotionsText, userID) VALUES (?, ?, ?, ?)";
+    @FXML
+    private Button Submit;
+
 
     @FXML
     protected void onSubmitButtonClick(ActionEvent event) {
@@ -48,7 +53,7 @@ public class EmotionsController extends MenuController {
             statement.setString(3, emotionsTextArea.getText());
             statement.setInt(4, getCurrentUserId());
             statement.executeUpdate();
-            submitButton.setText("Thanks for submitting!");
+            submitButton.setText("Submit!");
             feelingsTextArea.clear();
             emotionsTextArea.clear();
         } catch (SQLException e) {
