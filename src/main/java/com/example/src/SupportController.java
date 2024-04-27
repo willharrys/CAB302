@@ -13,7 +13,7 @@ public class SupportController extends MenuController {
 
 
     public void openLink(ActionEvent event) throws URISyntaxException, IOException {
-        java.awt.Desktop.getDesktop().browse(new URI("http://www.google.com"));
+        java.awt.Desktop.getDesktop().browse(new URI("https://www.lifeline.org.au/"));
     }
 
     public void openLink2(ActionEvent event) throws URISyntaxException, IOException {
