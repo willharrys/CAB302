@@ -8,26 +8,26 @@
 
 <?import javafx.scene.text.Text?>
 <VBox fx:controller="com.example.src.SupportController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
-      style="-fx-background-color:moccasin">
+      style="-fx-background-color:#d6d6b0">
     <HBox>
         <HBox>
             <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5;"
             />
 
             <Button fx:id="emotionMenu" text="Emotions" onAction="#emotionMenuClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white;-fx-background-radius: 5;"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white;-fx-background-radius: 5;"
             />
 
             <Button fx:id="entryMenu" text="Entries" onAction="#entryMenuClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5;"
             />
 
             <Button fx:id="supportMenu" text="Support" onAction="#supportMenuClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5;"/>
 
             <Button fx:id="signOutMenu" text="Sign Out" onAction="#signOutMenuClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5;"/>
 
         </HBox>
     </HBox>

@@ -13,9 +13,9 @@
     <!-- Welcome text -->
     <Label text="Welcome!" alignment="CENTER" style="-fx-font-size: 48px;"/>
     <!-- Login Button -->
-    <Button text="Login" fx:id="loginButton" onAction="#handleLogin" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;"/>
+    <Button text="Login" fx:id="loginButton" onAction="#handleLogin" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #c4d6b0; -fx-text-fill: #767f66; -fx-background-radius: 5;"/>
     <!-- Sign Up Button -->
-    <Button text="Sign Up" fx:id="signUpButton" onAction="#handleSignUp" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #1E88E5; -fx-text-fill: white; -fx-background-radius: 5;"/>
+    <Button text="Sign Up" fx:id="signUpButton" onAction="#handleSignUp" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #d6d6b0; -fx-text-fill: #767f66; -fx-background-radius: 5;"/>
     <!-- Forgot Password Button -->
     <Button text="Forgot Your Password?" fx:id="forgotPasswordButton" maxWidth="266" style="-fx-font-size: 14px;"/>
 </VBox>

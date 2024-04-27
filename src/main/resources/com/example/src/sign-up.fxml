@@ -17,7 +17,7 @@
         <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 10;">
             <!-- Return Button -->
             <Button fx:id="registerClick" text="Return" onAction="#OnReturnClick"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
+                    style="-fx-background-color: #d6d6b0; -fx-text-fill: #767f66; -fx-font-size: 16px; -fx-background-radius: 5;"
                     maxWidth="Infinity" prefHeight="20"
             />
         </HBox>
@@ -46,7 +46,7 @@
             <!-- Register Button -->
             <Button fx:id="registerButton" text="Register" onAction="#handleRegister"
                     maxWidth="350" prefHeight="50"
-                    style="-fx-background-color: #1E88E5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"
+                    style="-fx-background-color: #d6d6b0; -fx-text-fill: #767f66; -fx-font-size: 16px; -fx-background-radius: 5;"
             />
         </VBox>
     </center>
