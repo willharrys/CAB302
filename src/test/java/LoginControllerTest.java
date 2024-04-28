@@ -8,8 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LoginControllerTest {
 
@@ -24,7 +27,7 @@ class LoginControllerTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login.fxml"));
         Parent root = loader.load();
         loginController = loader.getController();
         usernameField = (TextField) root.lookup("#usernameField");
