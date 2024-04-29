@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /*
 This starts the application
  */
@@ -24,7 +26,7 @@ public class StartController {
 
     @FXML
     private void handleLogin(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         Stage stage = (Stage) loginButton.getScene().getWindow();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         stage.setScene(scene);
@@ -33,7 +35,7 @@ public class StartController {
 
     @FXML
     private void handleSignUp(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sign-up.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-up.fxml")));
         Stage stage = (Stage) signUpButton.getScene().getWindow();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         stage.setScene(scene);
