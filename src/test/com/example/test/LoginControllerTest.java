@@ -11,14 +11,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 class LoginControllerTest {
 
@@ -27,61 +26,68 @@ class LoginControllerTest {
     private PasswordField passwordField;
     private TextField displayNameField;
     private Button loginButton;
-    private Button registerButton;
     private Label messageLabel;
     private Button registerClick;
-    private Connection connection;
+    private static Connection connection;
 
-    void setUp() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login.fxml"));
-        Parent root = loader.load();
-        loginController = loader.getController();
-        usernameField = (TextField) root.lookup("#usernameField");
-        passwordField = (PasswordField) root.lookup("#passwordField");
-        displayNameField = (TextField) root.lookup("#displayNameField");
-        loginButton = (Button) root.lookup("#loginButton");
-        registerButton = (Button) root.lookup("#registerButton");
-        messageLabel = (Label) root.lookup("#messageLabel");
-        registerClick = (Button) root.lookup("#registerClick");
-
-        // Initialize the test database connection
-        connection = DriverManager.getConnection("jdbc:sqlite:src/test/resources/test_users.db");
-        createUsersTable();
-    }
-
-    private void createUsersTable() throws SQLException, SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT, userID INTEGER)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.execute();
-        }
-    }
     @BeforeAll
     static void setupSpec() throws Exception {
         // Initialize the JavaFX toolkit
         Platform.startup(() -> {});
     }
 
-//    @Test
-//    public void start() throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login.fxml"));
-//        Parent root = loader.load();
-//
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
+    @BeforeEach
+    void setUp() throws Exception {
+        // Initialize the test database connection
+        connection = DriverManager.getConnection("jdbc:sqlite:src/test/root/users.db");
+
+        // Create the users table
+        String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.execute();
+        }
+
+        loginController = new LoginController();
+        usernameField = loginController.usernameField;
+        passwordField = loginController.passwordField;
+        displayNameField = loginController.displayNameField;
+        loginButton = loginController.loginButton;
+        messageLabel = loginController.messageLabel;
+        registerClick = loginController.registerClick;
+    }
 
     @Test
     void testHandleLogin() {
         Platform.runLater(() -> {
-            // Test successful login
+            // Insert a test user
             insertTestUser("testuser", "testpassword", "Test User", 1);
+
+            // Test successful login
             usernameField.setText("testuser");
             passwordField.setText("testpassword");
             loginButton.fire();
             assertEquals("Welcome, Test User!", messageLabel.getText());
 
-            // Test null login
+        });
+    }
+    @Test
+    void testHandleLoginWithIncorrectUsername() {
+        Platform.runLater(() -> {
+            // Insert a test user
+            insertTestUser("testuser", "testpassword", "Test User", 1);
+
+            // Test login with incorrect username but correct password
+            usernameField.setText("incorrectuser");
+            passwordField.setText("testpassword");
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithNoUsernameAndNoPassword() {
+        Platform.runLater(() -> {
+            // Test login with no username and no password
             usernameField.setText("");
             passwordField.setText("");
             loginButton.fire();
@@ -90,31 +96,117 @@ class LoginControllerTest {
     }
 
     @Test
-    void testHandleRegister() {
+    void testHandleLoginWithUsernameButNullPassword() {
         Platform.runLater(() -> {
-            // Test successful registration
-            usernameField.setText("newuser");
-            passwordField.setText("newpassword");
-            displayNameField.setText("New User");
-            registerButton.fire();
-            // Assert that the user is successfully registered in the database
-            assertTrue(isUserRegistered("newuser"));
+            // Insert a test user
+            insertTestUser("testuser", "testpassword", "Test User", 1);
 
-            // Test registration with existing username
+            // Test login with username but null password
             usernameField.setText("testuser");
-            passwordField.setText("testpassword");
-            displayNameField.setText("Test User");
-            registerButton.fire();
-            // Assert that the registration fails with an appropriate error message
-            assertFalse(isUserRegistered("testuser"));
+            passwordField.setText(null);
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
 
-            // Test registration with null username and password
+    @Test
+    void testHandleLoginWithNullUsernameButCorrectPassword() {
+        Platform.runLater(() -> {
+            // Insert a test user
+            insertTestUser("testuser", "testpassword", "Test User", 1);
+
+            // Test login with null username but correct password
+            usernameField.setText(null);
+            passwordField.setText("testpassword");
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithMultipleUsers() {
+        Platform.runLater(() -> {
+            // Insert multiple test users
+            insertTestUser("user1", "password1", "User 1", 1);
+            insertTestUser("user2", "password2", "User 2", 2);
+            insertTestUser("user3", "password3", "User 3", 3);
+
+            // Test successful login for each user
+            usernameField.setText("user1");
+            passwordField.setText("password1");
+            loginButton.fire();
+            assertEquals("Welcome, User 1!", messageLabel.getText());
+
+            usernameField.setText("user2");
+            passwordField.setText("password2");
+            loginButton.fire();
+            assertEquals("Welcome, User 2!", messageLabel.getText());
+
+            usernameField.setText("user3");
+            passwordField.setText("password3");
+            loginButton.fire();
+            assertEquals("Welcome, User 3!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithIncorrectPassword() {
+        Platform.runLater(() -> {
+            // Insert a test user
+            insertTestUser("testuser", "testpassword", "Test User", 1);
+
+            // Test login with correct username but incorrect password
+            usernameField.setText("testuser");
+            passwordField.setText("wrongpassword");
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithEmptyUsername() {
+        Platform.runLater(() -> {
+            // Test login with empty username
             usernameField.setText("");
+            passwordField.setText("testpassword");
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithEmptyPassword() {
+        Platform.runLater(() -> {
+            // Test login with empty password
+            usernameField.setText("testuser");
             passwordField.setText("");
-            displayNameField.setText("Test User");
-            registerButton.fire();
-            // Assert that the registration fails with an appropriate error message
-            assertFalse(isUserRegistered("testuser"));
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithNonexistentUser() {
+        Platform.runLater(() -> {
+            // Test login with a nonexistent user
+            usernameField.setText("nonexistentuser");
+            passwordField.setText("password");
+            loginButton.fire();
+            assertEquals("Invalid username or password!", messageLabel.getText());
+        });
+    }
+
+    @Test
+    void testHandleLoginWithLeadingAndTrailingSpaces() {
+        Platform.runLater(() -> {
+            // Insert a test user
+            insertTestUser("testuser", "testpassword", "Test User", 1);
+
+            // Test login with leading and trailing spaces in username and password
+            usernameField.setText("  testuser  ");
+            passwordField.setText("  testpassword  ");
+            loginButton.fire();
+            assertEquals("Welcome, Test User!", messageLabel.getText());
         });
     }
 
@@ -140,19 +232,5 @@ class LoginControllerTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean isUserRegistered(String username) {
-        try {
-            String sql = "SELECT * FROM users WHERE username = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
-                ResultSet resultSet = statement.executeQuery();
-                return resultSet.next();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 }

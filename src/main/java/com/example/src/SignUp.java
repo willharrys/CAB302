@@ -14,22 +14,25 @@ import java.sql.*;
 
 public class SignUp {
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
-    private TextField displayNameField;
+    public TextField displayNameField;
     @FXML
-    private Button loginButton;
+    public Button registerButton;
     @FXML
-    private Button registerButton;
+    public Label messageLabel;
     @FXML
-    private Label messageLabel;
-    @FXML
-    private Button registerClick;
-    private Connection connection;
+    public Button registerClick;
+    public Connection connection;
 
     public SignUp() {
+        usernameField = new TextField();
+        passwordField = new PasswordField();
+        displayNameField = new TextField();
+        registerButton = new Button();
+        messageLabel = new Label();
         // Initialize the database connection
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:src/main/root/users.db");
@@ -47,34 +50,6 @@ public class SignUp {
         String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT)";
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
-        }
-    }
-
-    /**
-     * Handles the login button click event.
-     * Checks if the provided username and password match a user in the database.
-     */
-    @FXML
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        try {
-            String sql = "SELECT display_name FROM users WHERE username = ? AND password = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
-                statement.setString(2, password);
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    String displayName = resultSet.getString("display_name");
-                    messageLabel.setText("Welcome, " + displayName + "!");
-                } else {
-                    messageLabel.setText("Invalid username or password!");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

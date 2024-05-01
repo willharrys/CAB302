@@ -23,23 +23,28 @@ import java.sql.ResultSet;
 
 public class LoginController {
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
-    private TextField displayNameField;
+    public TextField displayNameField;
     @FXML
-    private Button loginButton;
+    public Button loginButton;
     @FXML
-    private Button registerButton;
+    public Label messageLabel;
     @FXML
-    private Label messageLabel;
-    @FXML
-    private Button registerClick;
+    public Button registerClick;
 
     private Connection connection;
 
     public LoginController() {
+        usernameField = new TextField();
+        passwordField = new PasswordField();
+        displayNameField = new TextField();
+        loginButton = new Button();
+        messageLabel = new Label();
+        registerClick = new Button();
+
         // Initialize the database connection
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:src/main/root/users.db");
