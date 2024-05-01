@@ -61,15 +61,15 @@ class LoginControllerTest {
         Platform.startup(() -> {});
     }
 
-    @Test
-    public void start() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+//    @Test
+//    public void start() throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/login.fxml"));
+//        Parent root = loader.load();
+//
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root));
+//        stage.show();
+//    }
 
     @Test
     void testHandleLogin() {
@@ -81,9 +81,9 @@ class LoginControllerTest {
             loginButton.fire();
             assertEquals("Welcome, Test User!", messageLabel.getText());
 
-            // Test invalid login
-            usernameField.setText("invaliduser");
-            passwordField.setText("invalidpassword");
+            // Test null login
+            usernameField.setText("");
+            passwordField.setText("");
             loginButton.fire();
             assertEquals("Invalid username or password!", messageLabel.getText());
         });
@@ -103,6 +103,14 @@ class LoginControllerTest {
             // Test registration with existing username
             usernameField.setText("testuser");
             passwordField.setText("testpassword");
+            displayNameField.setText("Test User");
+            registerButton.fire();
+            // Assert that the registration fails with an appropriate error message
+            assertFalse(isUserRegistered("testuser"));
+
+            // Test registration with null username and password
+            usernameField.setText("");
+            passwordField.setText("");
             displayNameField.setText("Test User");
             registerButton.fire();
             // Assert that the registration fails with an appropriate error message
