@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class EntryController extends MenuController{
     @FXML
-    private VBox entriesList;
+    public VBox entriesList;
 
     public void initialize() {
         displayEntries();
