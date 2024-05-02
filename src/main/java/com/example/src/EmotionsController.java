@@ -37,8 +37,8 @@ public class EmotionsController extends MenuController {
     @FXML
     public TextArea emotionsTextArea;
 
-    private static final String DB_URL = "jdbc:sqlite:src/main/root/users.db";
-    private static final String INSERT_SQL = "INSERT INTO entries (moodSlider, feelingsText, emotionsText, userID) VALUES (?, ?, ?, ?)";
+    public static final String DB_URL = "jdbc:sqlite:src/main/root/users.db";
+    public static final String INSERT_SQL = "INSERT INTO entries (moodSlider, feelingsText, emotionsText, userID) VALUES (?, ?, ?, ?)";
     @FXML
     private Button Submit;
 
