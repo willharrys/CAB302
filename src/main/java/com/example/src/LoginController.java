@@ -1,45 +1,50 @@
 package com.example.src;
 
-import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.fxml.FXML;
+
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+
 
 public class LoginController {
     @FXML
-    private TextField usernameField;
+    public TextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
-    private TextField displayNameField;
+    public TextField displayNameField;
     @FXML
-    private Button loginButton;
+    public Button loginButton;
     @FXML
-    private Button registerButton;
+    public Label messageLabel;
     @FXML
-    private Label messageLabel;
-    @FXML
-    private Button registerClick;
+    public Button registerClick;
 
     private Connection connection;
 
     public LoginController() {
+        usernameField = new TextField();
+        passwordField = new PasswordField();
+        displayNameField = new TextField();
+        loginButton = new Button();
+        messageLabel = new Label();
+        registerClick = new Button();
+
         // Initialize the database connection
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:src/main/root/users.db");

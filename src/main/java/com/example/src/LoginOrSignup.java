@@ -10,14 +10,15 @@ import javafx.stage.Stage;
 
 
 public class LoginOrSignup {
+
     public class StartController {
 
 
         @FXML
-        private Button loginButton;
+        public Button loginButton;
 
         @FXML
-        private Button signUpButton;
+        public Button signUpButton;
 
         public static final String TITLE = "Login / Sign Up";
         public static final int WIDTH = 800;
