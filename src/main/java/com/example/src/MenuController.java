@@ -79,6 +79,16 @@ public class MenuController {
     }
 
     @FXML
+    protected void profileMenuClick()
+            throws IOException {
+        Stage stage = (Stage) entryMenu.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
+
+    }
+
+    @FXML
     protected void signOutMenuClick()
             throws IOException {
         Stage stage = (Stage) signOutMenu.getScene().getWindow();
