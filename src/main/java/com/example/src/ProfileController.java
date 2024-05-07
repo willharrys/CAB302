@@ -49,14 +49,47 @@ public class ProfileController extends MenuController{
     }
 
     private void updateProfile() {
-        String updateSQL = "UPDATE users SET username = ?, password = ?, display_name = ? WHERE userID = ?";
-        try (Connection conn = connect();
-             PreparedStatement statement = conn.prepareStatement(updateSQL)) {
+        // Constructing the SQL query dynamically based on input
+        StringBuilder updateSQL = new StringBuilder("UPDATE users SET ");
+        int count = 0;
 
-            statement.setString(1, usernameField.getText());
-            statement.setString(2, passwordField.getText());
-            statement.setString(3, nameField.getText());
-            statement.setInt(4, getCurrentUserId());
+        if (!usernameField.getText().isEmpty()) {
+            updateSQL.append("username = ?");
+            count++;
+        }
+        if (!passwordField.getText().isEmpty()) {
+            if (count > 0) updateSQL.append(", ");
+            updateSQL.append("password = ?");
+            count++;
+        }
+        if (!nameField.getText().isEmpty()) {
+            if (count > 0) updateSQL.append(", ");
+            updateSQL.append("display_name = ?");
+            count++;
+        }
+
+        if (count == 0) {
+            updateMessageLabel("No information entered to update.", false);
+            return; // Exit if no data is entered to update
+        }
+
+        updateSQL.append(" WHERE userID = ?");
+
+        try (Connection conn = connect();
+             PreparedStatement statement = conn.prepareStatement(updateSQL.toString())) {
+
+            int index = 1;
+            if (!usernameField.getText().isEmpty()) {
+                statement.setString(index++, usernameField.getText());
+            }
+            if (!passwordField.getText().isEmpty()) {
+                statement.setString(index++, passwordField.getText());
+            }
+            if (!nameField.getText().isEmpty()) {
+                statement.setString(index++, nameField.getText());
+            }
+
+            statement.setInt(index, getCurrentUserId());
 
             int affectedRows = statement.executeUpdate();
             if (affectedRows > 0) {
@@ -69,6 +102,7 @@ public class ProfileController extends MenuController{
             e.printStackTrace();
         }
     }
+
 
     private void deleteEntries() {
         String deleteSQL = "DELETE FROM entries WHERE userID = ?";
