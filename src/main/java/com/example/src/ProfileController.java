@@ -5,6 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.stage.FileChooser;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 
 public class ProfileController extends MenuController{
@@ -70,7 +76,7 @@ public class ProfileController extends MenuController{
 
         if (count == 0) {
             updateMessageLabel("No information entered to update.", false);
-            return; // Exit if no data is entered to update
+            return;
         }
 
         updateSQL.append(" WHERE userID = ?");
@@ -107,11 +113,11 @@ public class ProfileController extends MenuController{
     private void deleteEntries() {
         String deleteSQL = "DELETE FROM entries WHERE userID = ?";
         try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+             PreparedStatement statement = conn.prepareStatement(deleteSQL)) {
 
-            pstmt.setInt(1, getCurrentUserId());
+            statement.setInt(1, getCurrentUserId());
 
-            int affectedRows = pstmt.executeUpdate();
+            int affectedRows = statement.executeUpdate();
             if (affectedRows > 0) {
                 updateMessageLabel("All entries deleted successfully!", true);
             } else {
@@ -126,11 +132,11 @@ public class ProfileController extends MenuController{
     private void deleteAccount() {
         String deleteSQL = "DELETE FROM users WHERE userID = ?";
         try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+             PreparedStatement statement = conn.prepareStatement(deleteSQL)) {
 
-            pstmt.setInt(1, getCurrentUserId());
+            statement.setInt(1, getCurrentUserId());
 
-            int affectedRows = pstmt.executeUpdate();
+            int affectedRows = statement.executeUpdate();
             if (affectedRows > 0) {
                 updateMessageLabel("Account deleted successfully!", true);
             } else {
@@ -147,7 +153,7 @@ public class ProfileController extends MenuController{
         passwordField.clear();
         nameField.clear();
     }
-
+    // This makes if it is successful green if it is not successful it makes the text red
     private void updateMessageLabel(String message, boolean isSuccess) {
         messageLabel.setText(message);
         if (isSuccess) {
@@ -156,4 +162,46 @@ public class ProfileController extends MenuController{
             messageLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
         }
     }
+
+    @FXML
+    private void handleExportEntriesAction() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("Entries.txt");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            exportEntries(file);
+        }
+    }
+
+    private void exportEntries(File file) {
+        String query = "SELECT moodSlider, feelingsText, emotionsText FROM entries WHERE userID = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+
+            statement.setInt(1, getCurrentUserId());
+            ResultSet resultset = statement.executeQuery();
+            StringBuilder sb = new StringBuilder();
+
+            while (resultset.next()) {
+                sb.append("Mood: ").append(resultset.getInt("moodSlider")).append("\n");
+                sb.append("Feelings: ").append(resultset.getString("feelingsText")).append("\n");
+                sb.append("Emotions: ").append(resultset.getString("emotionsText")).append("\n\n");
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(sb.toString());
+                updateMessageLabel("Entries exported successfully!", true);
+            } catch (IOException e) {
+                updateMessageLabel("Failed to write to file: " + e.getMessage(), false);
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            updateMessageLabel("Error fetching entries: " + e.getMessage(), false);
+            e.printStackTrace();
+        }
+    }
+
 }

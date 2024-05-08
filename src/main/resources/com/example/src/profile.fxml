@@ -30,6 +30,8 @@
         <TextField fx:id="nameField" promptText="Name" />
         <Button text="Update Information" onAction="#handleUpdateAction"
                 style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button text="Export Entries" onAction="#handleExportEntriesAction"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
         <Button text="Reset Entries" onAction="#handleResetEntriesAction"
                 style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
         <Button text="Delete Account" onAction="#handleDeleteAction"
