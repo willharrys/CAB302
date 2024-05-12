@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EntryController extends MenuController {
@@ -19,7 +20,7 @@ public class EntryController extends MenuController {
 
     private void displayEntries() {
         String dbUrl = "jdbc:sqlite:src/main/root/users.db";
-        String query = "SELECT entryNo, moodSlider, feelingsText, emotionsText FROM entries WHERE userID = ?";
+        String query = "SELECT entryNo, moodSlider, feelingsText, emotionsText, created_at FROM entries WHERE userID = ? ORDER BY created_at DESC";
 
         try (Connection connection = DriverManager.getConnection(dbUrl);
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -32,8 +33,12 @@ public class EntryController extends MenuController {
                 int mood = resultSet.getInt("moodSlider");
                 String feelings = resultSet.getString("feelingsText");
                 String emotions = resultSet.getString("emotionsText");
+                Timestamp timestamp = resultSet.getTimestamp("created_at");
 
-                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions);
+                // Format the timestamp for display
+                String formattedDate = timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + formattedDate);
                 entryLabel.setWrapText(true);
                 entryLabel.setMaxWidth(600);
                 entryLabel.setStyle("-fx-padding: 10; -fx-border-width: 2; -fx-border-insets: 5; -fx-font-size:18;");
@@ -42,8 +47,8 @@ public class EntryController extends MenuController {
                 editButton.setOnAction(e -> editEntry(entryNo));
 
                 Button deleteButton = new Button("Delete");
-                HBox entryBox = new HBox(10, entryLabel, editButton, deleteButton);  // Create the HBox here
-                deleteButton.setOnAction(e -> deleteEntry(entryNo, entryBox));  // Pass entryBox directly
+                HBox entryBox = new HBox(10, entryLabel, editButton, deleteButton);
+                deleteButton.setOnAction(e -> deleteEntry(entryNo, entryBox));
 
                 entriesList.getChildren().add(entryBox);
             }
@@ -51,6 +56,8 @@ public class EntryController extends MenuController {
             e.printStackTrace();
         }
     }
+
+
 
 
     private void editEntry(int entryNo) {
