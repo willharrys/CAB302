@@ -46,66 +46,23 @@ public class LoginController {
         registerClick = new Button();
 
         // Initialize the database connection
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/root/users.db");
-            createUsersTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseInitializer databaseInitializer = new DatabaseInitializer();
+        connection = databaseInitializer.getConnection();
     }
-
-
-    /**
-     * Creates the users table if it doesn't exist.
-     */
     private void createUsersTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT)";
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         }
     }
-
-    /**
-     * Handles the login button click event.
-     * Checks if the provided username and password match a user in the database.
-     */
-
-/*
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         try {
-            String sql = "SELECT display_name FROM users WHERE username = ? AND password = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
-                statement.setString(2, password);
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    String displayName = resultSet.getString("display_name");
-                    messageLabel.setText("Welcome, " + displayName + "!");
-
-
-                } else {
-                    messageLabel.setText("Invalid username or password!");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
- */
-    @FXML
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        try {
-            String sql = "SELECT display_name, userID FROM users WHERE username = ? AND password = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            DatabaseInitializer databaseInitializer = new DatabaseInitializer();
+            try (PreparedStatement statement = databaseInitializer.getConnection().prepareStatement(DatabaseInitializer.SELECT_USER_SQL)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
                 ResultSet resultSet = statement.executeQuery();
@@ -114,20 +71,20 @@ public class LoginController {
                     String displayName = resultSet.getString("display_name");
                     int userID = resultSet.getInt("userID");
 
+                    // Load the homepage view and pass the username and userID to the MenuController
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/src/homepage-view.fxml"));
                     Parent root = loader.load();
                     MenuController menuController = loader.getController();
                     menuController.setWelcomeMessage(username, userID);
-
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
                     stage.setScene(new Scene(root, 800, 650));
                     stage.show();
-
                     messageLabel.setText("Welcome, " + displayName + "!");
                 } else {
                     messageLabel.setText("Invalid username or password!");
                 }
             }
+            databaseInitializer.closeConnection();
         } catch (IOException e) {
             e.printStackTrace();
             messageLabel.setText("Failed to load user interface.");
@@ -137,37 +94,6 @@ public class LoginController {
         }
     }
 
-
-    /**
-     * Handles the register button click event.
-     * Inserts a new user into the database with the provided username, password, and display name.
-     */
-    @FXML
-    private void handleRegister() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String displayName = displayNameField.getText();
-
-        try {
-            String sql = "INSERT INTO users (username, password, display_name) VALUES (?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
-                statement.setString(2, password);
-                statement.setString(3, displayName);
-                int rowsAffected = statement.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    // Registration successful, display a success message
-                    System.out.println("Registration successful!");
-                } else {
-                    // Registration failed, display an error message
-                    System.out.println("Registration failed!");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     @FXML
     protected void OnReturnClick()
             throws IOException {

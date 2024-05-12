@@ -13,7 +13,6 @@ public class LoginOrSignup {
 
     public class StartController {
 
-
         @FXML
         public Button loginButton;
 

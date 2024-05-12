@@ -33,25 +33,12 @@ public class SignUp {
         displayNameField = new TextField();
         registerButton = new Button();
         messageLabel = new Label();
+
         // Initialize the database connection
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/root/users.db");
-            createUsersTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DatabaseInitializer databaseInitializer = new DatabaseInitializer();
+        connection = databaseInitializer.getConnection();
     }
 
-
-    /**
-     * Creates the users table if it doesn't exist.
-     */
-    private void createUsersTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT)";
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-        }
-    }
 
     /**
      * Handles the register button click event.
@@ -66,19 +53,24 @@ public class SignUp {
         // Check if any field is empty
         if (username.isEmpty() || password.isEmpty() || displayName.isEmpty()) {
             System.out.println("Registration failed! All fields are required.");
-            return; // Exit the method early if any field is empty
+            return;
         }
 
         try {
-            String sql = "INSERT INTO users (username, password, display_name) VALUES (?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (PreparedStatement statement = connection.prepareStatement(DatabaseInitializer.INSERT_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, username);
                 statement.setString(2, password);
                 statement.setString(3, displayName);
                 int rowsAffected = statement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    System.out.println("Registration successful!");
+                    ResultSet generatedKeys = statement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int userID = generatedKeys.getInt(1);
+                        messageLabel.setText("Registration successful! Welcome, " + displayName + ", your userID is " + userID);
+                    } else {
+                        System.out.println("Registration failed!");
+                    }
                 } else {
                     System.out.println("Registration failed!");
                 }
@@ -92,6 +84,7 @@ public class SignUp {
             }
         }
     }
+
 
 
     @FXML
