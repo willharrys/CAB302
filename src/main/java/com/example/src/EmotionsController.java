@@ -17,7 +17,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class EmotionsController extends MenuController {
 
@@ -66,7 +67,7 @@ public class EmotionsController extends MenuController {
                 "feelingsText TEXT, " +
                 "emotionsText TEXT, " +
                 "userID INTEGER, " +
-                "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"; // <-- Define created_at as TIMESTAMP
+                "created_at TEXT)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.execute();
         }
@@ -88,12 +89,15 @@ public class EmotionsController extends MenuController {
             submitButton.setText("Please enter your emotions");
             return;
         }
+        LocalDate today = LocalDate.now();
+        String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+
         try(PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
             statement.setInt(1, (int) moodSlider.getValue());
             statement.setString(2, feelingsTextArea.getText());
             statement.setString(3, emotionsTextArea.getText());
             statement.setInt(4, 1);
-            statement.setString(5, LocalDateTime.now().toString());
+            statement.setString(5, formattedDate);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 submitButton.setText("Thanks for submitting!");

@@ -39,11 +39,6 @@ public class SignUp {
         connection = databaseInitializer.getConnection();
     }
 
-
-    /**
-     * Handles the register button click event.
-     * Inserts a new user into the database with the provided username, password, and display name.
-     */
     @FXML
     private void handleRegister() {
         String username = usernameField.getText();

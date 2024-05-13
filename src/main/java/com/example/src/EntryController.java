@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EntryController extends MenuController {
@@ -33,12 +32,9 @@ public class EntryController extends MenuController {
                 int mood = resultSet.getInt("moodSlider");
                 String feelings = resultSet.getString("feelingsText");
                 String emotions = resultSet.getString("emotionsText");
-                Timestamp timestamp = resultSet.getTimestamp("created_at");
+                String createdAt = resultSet.getString("created_at");
 
-                // Format the timestamp for display
-                String formattedDate = timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + formattedDate);
+                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + createdAt);
                 entryLabel.setWrapText(true);
                 entryLabel.setMaxWidth(600);
                 entryLabel.setStyle("-fx-padding: 10; -fx-border-width: 2; -fx-border-insets: 5; -fx-font-size:18;");
@@ -56,8 +52,6 @@ public class EntryController extends MenuController {
             e.printStackTrace();
         }
     }
-
-
 
 
     private void editEntry(int entryNo) {
@@ -133,7 +127,6 @@ public class EntryController extends MenuController {
             }
         });
     }
-
 
     private void deleteEntry(int entryNo, HBox entryBox) {
         String dbUrl = "jdbc:sqlite:src/main/root/users.db";
