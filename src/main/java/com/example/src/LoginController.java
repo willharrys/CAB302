@@ -49,12 +49,6 @@ public class LoginController {
         DatabaseInitializer databaseInitializer = new DatabaseInitializer();
         connection = databaseInitializer.getConnection();
     }
-    private void createUsersTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, display_name TEXT)";
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-        }
-    }
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();

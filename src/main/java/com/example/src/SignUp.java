@@ -48,6 +48,7 @@ public class SignUp {
         // Check if any field is empty
         if (username.isEmpty() || password.isEmpty() || displayName.isEmpty()) {
             System.out.println("Registration failed! All fields are required.");
+            messageLabel.setText("Registration failed! All fields are required.");
             return;
         }
 
@@ -62,12 +63,15 @@ public class SignUp {
                     ResultSet generatedKeys = statement.getGeneratedKeys();
                     if (generatedKeys.next()) {
                         int userID = generatedKeys.getInt(1);
+                        messageLabel.setStyle("-fx-text-fill: green;");
                         messageLabel.setText("Registration successful! Welcome, " + displayName + ", your userID is " + userID);
                     } else {
                         System.out.println("Registration failed!");
+                        messageLabel.setText("Registration failed!");
                     }
                 } else {
                     System.out.println("Registration failed!");
+                    messageLabel.setText("Registration failed!");
                 }
             }
         } catch (SQLException e) {

@@ -20,11 +20,8 @@ public class EntryController extends MenuController {
     }
 
     private void displayEntries() {
-        String dbUrl = "jdbc:sqlite:src/main/root/users.db";
-        String query = "SELECT entryNo, moodSlider, feelingsText, emotionsText, created_at FROM entries WHERE userID = ? ORDER BY created_at DESC";
-
-        try (Connection connection = DriverManager.getConnection(dbUrl);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = DatabaseInitializer.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseInitializer.DISPLAY_ENTRIES_SQL)) {
 
             statement.setInt(1, getCurrentUserId());
             ResultSet resultSet = statement.executeQuery();
@@ -36,11 +33,9 @@ public class EntryController extends MenuController {
                 String emotions = resultSet.getString("emotionsText");
                 String createdAt = resultSet.getString("created_at");
 
-                // Parse the date string in the "ddmmyyyy" format
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
                 LocalDate localDate = LocalDate.parse(createdAt, formatter);
 
-                // Format the date to "dd/MM/yyyy"
                 String formattedDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
                 Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + formattedDate);
@@ -138,13 +133,11 @@ public class EntryController extends MenuController {
     }
 
     private void deleteEntry(int entryNo, HBox entryBox) {
-        String dbUrl = "jdbc:sqlite:src/main/root/users.db";
-        String query = "DELETE FROM entries WHERE entryNo = ?";
-
-        try (Connection connection = DriverManager.getConnection(dbUrl);
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = DatabaseInitializer.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DatabaseInitializer.DELETE_ENTRY_SQL)) {
 
             statement.setInt(1, entryNo);
+            statement.setInt(2, getCurrentUserId());
             statement.executeUpdate();
             entriesList.getChildren().remove(entryBox);
         } catch (SQLException e) {

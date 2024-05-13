@@ -7,7 +7,7 @@ public class DatabaseInitializer {
     public static final String INSERT_ENTRIES_SQL = "INSERT INTO entries (moodSlider, feelingsText, emotionsText, userID, entryNo) VALUES (?, ?, ?, ?, ?)";
     public static final String INSERT_USER_SQL = "INSERT INTO users (username, password, display_name) VALUES (?, ?, ?)";
     public static final String SELECT_USER_SQL = "SELECT display_name, userID FROM users WHERE username = ? AND password = ?";
-    public static final String SELECT_ENTRIES_SQL = "SELECT entryNo, moodSlider, feelingsText, emotionsText FROM entries WHERE userID = ?";
+    public static final String DISPLAY_ENTRIES_SQL = "SELECT entryNo, moodSlider, feelingsText, emotionsText, created_at FROM entries WHERE userID = ? ORDER BY created_at DESC";
     public static final String UPDATE_ENTRY_SQL = "UPDATE entries SET moodSlider = ?, feelingsText = ?, emotionsText = ? WHERE entryNo = ? AND userID = ?";
     public static final String DELETE_ENTRY_SQL = "DELETE FROM entries WHERE entryNo = ? AND userID = ?";
 
