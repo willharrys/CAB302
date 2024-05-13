@@ -96,7 +96,7 @@ public class EmotionsController extends MenuController {
             statement.setInt(1, (int) moodSlider.getValue());
             statement.setString(2, feelingsTextArea.getText());
             statement.setString(3, emotionsTextArea.getText());
-            statement.setInt(4, 1);
+            statement.setInt(4, getCurrentUserId());
             statement.setString(5, formattedDate);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

@@ -7,6 +7,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EntryController extends MenuController {
@@ -34,7 +36,14 @@ public class EntryController extends MenuController {
                 String emotions = resultSet.getString("emotionsText");
                 String createdAt = resultSet.getString("created_at");
 
-                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + createdAt);
+                // Parse the date string in the "ddmmyyyy" format
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+                LocalDate localDate = LocalDate.parse(createdAt, formatter);
+
+                // Format the date to "dd/MM/yyyy"
+                String formattedDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                Label entryLabel = new Label("Mood: " + mood + "\nFeelings: " + feelings + "\nEmotions: " + emotions + "\nDate: " + formattedDate);
                 entryLabel.setWrapText(true);
                 entryLabel.setMaxWidth(600);
                 entryLabel.setStyle("-fx-padding: 10; -fx-border-width: 2; -fx-border-insets: 5; -fx-font-size:18;");
