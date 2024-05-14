@@ -60,6 +60,11 @@ public class ProfileController extends MenuController{
         int count = 0;
 
         if (!usernameField.getText().isEmpty()) {
+            String newUsername = usernameField.getText();
+            if (isUsernameExists(newUsername)) {
+                updateMessageLabel("Username already exists. Please choose a different username.", false);
+                return;
+            }
             updateSQL.append("username = ?");
             count++;
         }
@@ -107,6 +112,22 @@ public class ProfileController extends MenuController{
             updateMessageLabel("Error updating profile: " + e.getMessage(), false);
             e.printStackTrace();
         }
+    }
+
+    private boolean isUsernameExists(String username) {
+        String query = "SELECT COUNT(*) FROM users WHERE username = ?";
+        try (Connection conn = connect();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
