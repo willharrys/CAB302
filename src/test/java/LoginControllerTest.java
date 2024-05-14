@@ -1,5 +1,3 @@
-package com.example.test;
-
 import com.example.src.LoginController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

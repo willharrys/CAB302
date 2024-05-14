@@ -1,5 +1,3 @@
-package com.example.test;
-
 import com.example.src.LoginOrSignup;
 import com.example.src.SignUp;
 import javafx.application.Platform;

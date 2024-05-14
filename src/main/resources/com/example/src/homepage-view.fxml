@@ -33,6 +33,8 @@
     <!--<Text text="Welcome to our app!" style="-fx-font-size:24"/>-->
     <Label fx:id="welcomeLabel" layoutX="10" layoutY="20" text="Welcome!" style="-fx-font-size: 24px;"/>
 
+    <Label fx:id="quoteLabel" layoutX="10" layoutY="60" text="'Quote here!' - W" style="-fx-font-size: 24px;"/>
+
     <VBox alignment="CENTER">
         <ImageView>
             <Image  url="https://theaggie.org/wp-content/uploads/2023/04/meditation_op_SUN_JOANNE_AGGIE-01-696x464.png"/>
