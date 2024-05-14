@@ -94,8 +94,22 @@ public class EntryController extends MenuController {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
+                String moodText = moodField.getText();
+                if (!moodText.isEmpty()) {
+                    try {
+                        int mood = Integer.parseInt(moodText);
+                        if (mood < 1 || mood > 10) {
+                            showInvalidMoodAlert();
+                            return null;
+                        }
+                    } catch (NumberFormatException e) {
+                        showInvalidMoodAlert();
+                        return null;
+                    }
+                }
+
                 Map<String, String> result = new HashMap<>();
-                result.put("mood", moodField.getText());
+                result.put("mood", moodText);
                 result.put("feelings", feelingsArea.getText());
                 result.put("emotions", emotionsArea.getText());
                 return result;
@@ -135,6 +149,14 @@ public class EntryController extends MenuController {
                 }
             }
         });
+    }
+
+    private void showInvalidMoodAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Mood Value");
+        alert.setHeaderText(null);
+        alert.setContentText("Please enter a valid mood value between 1 and 10.");
+        alert.showAndWait();
     }
 
     private void deleteEntry(int entryNo, HBox entryBox) {
