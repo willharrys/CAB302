@@ -21,6 +21,7 @@ public class MenuController {
     @FXML private Button entryMenu;
     @FXML private Button signOutMenu;
     @FXML private Label welcomeLabel;
+    @FXML private Label quoteLabel;
 
     protected static int currentUserId;
 
@@ -35,8 +36,14 @@ public class MenuController {
 
     @FXML
     public void setWelcomeMessage(String username, int userID){
-        welcomeLabel.setText("Welcome username: " + username + " userID: " + userID);
+        welcomeLabel.setText("Welcome, " + username + "! Your user ID is " + userID + ". Enjoy your time here!");
+        setQuote();
         setCurrentUserId(userID);
+    }
+
+    @FXML
+    public void setQuote() {
+        quoteLabel.setText(getRandomQuote());
     }
 
     @FXML
@@ -98,5 +105,32 @@ public class MenuController {
 
     }
 
+    private final String[] MOTIVATIONAL_QUOTES = {
+            "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it. - Steve Jobs",
+            "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
+            "The best way to predict the future is to create it. - Peter Drucker",
+            "The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it. - Jordan Belfort",
+            "The only way to achieve the impossible is to believe it is possible. - Charles Kingsleigh",
+            "The only way to get started is to quit talking and begin doing. - Walt Disney",
+            "The only way to make sense out of change is to plunge into it, move with it, and join the dance. - Alan Watts",
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "The only way to discover the limits of the possible is to go beyond them into the impossible. - Arthur C. Clarke",
+            "The only way to achieve the impossible is to believe it is possible. - Charles Kingsleigh",
+            "The only way to get started is to quit talking and begin doing. - Walt Disney",
+            "The only way to make sense out of change is to plunge into it, move with it, and join the dance. - Alan Watts",
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "The only way to discover the limits of the possible is to go beyond them into the impossible. - Arthur C. Clarke",
+            "The only way to achieve the impossible is to believe it is possible. - Charles Kingsleigh",
+            "The only way to get started is to quit talking and begin doing. - Walt Disney",
+            "The only way to make sense out of change is to plunge into it, move with it, and join the dance. - Alan Watts",
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "The only way to discover the limits of the possible is to go beyond them into the impossible. - Arthur C. Clarke",
+            "The only way to achieve the impossible is to believe it is possible. - Charles",
+            "The only way to get started is to quit talking and begin doing. - Walt Disney",
+    };
 
+    private String getRandomQuote() {
+        int randomIndex = (int) (Math.random() * MOTIVATIONAL_QUOTES.length);
+        return MOTIVATIONAL_QUOTES[randomIndex];
+    }
 }

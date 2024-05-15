@@ -32,7 +32,8 @@
 </HBox>
 
     <VBox alignment="CENTER">
-        <Label fx:id="welcomeLabel" layoutX="20" layoutY="20" text="Welcome!" style="-fx-font-size: 36px;"/>
+        <Label fx:id="welcomeLabel" layoutX="20" layoutY="20" text="Welcome!" style="-fx-font-size: 36px;" wrapText="true"/>
+        <Label fx:id="quoteLabel" layoutX="30" layoutY="30" text="Today's Quote For You" style="-fx-font-size: 24px;" wrapText="true"/>
         <ImageView>
             <Image  url="https://theaggie.org/wp-content/uploads/2023/04/meditation_op_SUN_JOANNE_AGGIE-01-696x464.png"/>
         </ImageView>
