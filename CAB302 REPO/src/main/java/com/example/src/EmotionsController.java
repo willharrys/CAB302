@@ -20,61 +20,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
-public class EmotionsController extends MenuController {
+import static com.example.src.DatabaseInitializer.INSERT_ENTRIES_SQL;
 
-    public Button Resubmit;
+public class EmotionsController extends MenuController {
     @FXML
     public Slider moodSlider;
-    public Button Submit2;
-    public Button Resubmit2;
     @FXML
     public Button submitButton;
-    @FXML
-    private TextArea Clear;
-
-    @FXML
-    private TextArea Clear2;
     @FXML
     public TextArea feelingsTextArea;
     @FXML
     public TextArea emotionsTextArea;
-
-    public static final String DB_URL = "jdbc:sqlite:src/main/root/users.db";
-    public static final String INSERT_SQL = "INSERT INTO entries (moodSlider, feelingsText, emotionsText, userID, created_at) VALUES (?, ?, ?, ?, ?)";
-
     @FXML
-    private Button Submit;
-
     private Connection connection;
-
     public EmotionsController() {
-        // Initialize the database connection
+        // Initialize the database connection using the connection from DatabaseInitializer
+        this.connection = DatabaseInitializer.getConnection();
         try {
-            connection = DriverManager.getConnection(DB_URL);
-            createEmotionTable();
+            DatabaseInitializer.createTables();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Creates the emotions table if it doesn't exist.
-     */
-    public void createEmotionTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS entries (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "moodSlider INTEGER, " +
-                "feelingsText TEXT, " +
-                "emotionsText TEXT, " +
-                "userID INTEGER, " +
-                "created_at TEXT)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.execute();
-        }
-    }
-
-
-
     @FXML
     protected void onSubmitButtonClick(ActionEvent event) {
         if (moodSlider.getValue() == 0) {
@@ -92,7 +59,8 @@ public class EmotionsController extends MenuController {
         LocalDate today = LocalDate.now();
         String formattedDate = today.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
 
-        try(PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
+        DatabaseInitializer.debugLog("Preparing to submit emotions to the database");
+        try (PreparedStatement statement = DatabaseInitializer.getConnection().prepareStatement(INSERT_ENTRIES_SQL)) {
             statement.setInt(1, (int) moodSlider.getValue());
             statement.setString(2, feelingsTextArea.getText());
             statement.setString(3, emotionsTextArea.getText());
@@ -100,36 +68,20 @@ public class EmotionsController extends MenuController {
             statement.setString(5, formattedDate);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
+                DatabaseInitializer.debugLog("Emotions submitted successfully");
                 submitButton.setText("Thanks for submitting!");
             } else {
+                DatabaseInitializer.debugLog("No rows affected. Potential error during submission.");
                 submitButton.setText("Error submitting");
             }
             submitButton.setDisable(true);
             feelingsTextArea.clear();
             emotionsTextArea.clear();
         } catch (SQLException e) {
+            DatabaseInitializer.debugLog("SQL Exception during submitting emotions: " + e.getMessage());
             submitButton.setText("Error on submitting please try again");
             e.printStackTrace();
         }
     }
 
-/*
-   @FXML
-    protected void ResubmitButtonClick(){
-        Submit.setText("Submit!");
-    }
-
-    @FXML
-    public void onSubmitButtonClick(ActionEvent event) {
-        Submit2.setText("Thanks for submitting!");
-        Clear2.clear();
-    }
-
-
-    @FXML
-    public void onResubmitButtonClick(ActionEvent event) {
-        Submit2.setText("Submit!");
-    }
-
- */
 }

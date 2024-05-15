@@ -13,12 +13,6 @@ public class LoginOrSignup {
 
     public class StartController {
 
-        @FXML
-        public Button loginButton;
-
-        @FXML
-        public Button signUpButton;
-
         public static final String TITLE = "Login / Sign Up";
         public static final int WIDTH = 800;
         public static final int HEIGHT = 650;

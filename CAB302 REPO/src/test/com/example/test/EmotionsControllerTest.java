@@ -62,13 +62,8 @@ public class EmotionsControllerTest {
     @Test
     void testCreateEmotionTable() {
         Platform.runLater(() -> {
-            try {
-                emotionsController = new EmotionsController();
-                emotionsController.createEmotionTable();
-                assertTrue(checkEmotionTable());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            emotionsController = new EmotionsController();
+            assertTrue(checkEmotionTable());
         });
     }
 

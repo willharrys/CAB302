@@ -87,9 +87,6 @@ public class SignUp {
             }
         }
     }
-
-
-
     @FXML
     protected void OnReturnClick()
         throws IOException {

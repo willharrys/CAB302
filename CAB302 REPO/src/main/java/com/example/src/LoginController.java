@@ -78,7 +78,7 @@ public class LoginController {
                     messageLabel.setText("Invalid username or password!");
                 }
             }
-            databaseInitializer.closeConnection();
+//            databaseInitializer.closeConnection();
         } catch (IOException e) {
             e.printStackTrace();
             messageLabel.setText("Failed to load user interface.");

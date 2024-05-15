@@ -22,8 +22,6 @@ public class StartController {
     private Button signUpButton;
     public static final int WIDTH = 800;
     public static final int HEIGHT = 650;
-
-
     @FXML
     private void handleLogin(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
