@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:controller="com.example.src.EmotionsController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
+      style="-fx-background-color:#d6d6b0; -fx-padding: 10;">
+    <HBox>
+        <HBox spacing="5">
+            <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+            />
+
+            <Button fx:id="emotionMenu" text="Emotions" onAction="#emotionMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+            />
+
+            <Button fx:id="entryMenu" text="Entries" onAction="#entryMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+            />
+
+            <Button fx:id="supportMenu" text="Support" onAction="#supportMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+
+            <Button fx:id="profileMenu" text="Profile" onAction="#profileMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+            <Button fx:id="signOutMenu" text="Sign Out" onAction="#signOutMenuClick"
+                    style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+        </HBox>
+    </HBox>
+
+    <VBox  alignment="TOP_CENTER" spacing="15" >
+        <Label text="Use the slider below to show how you are feeling on a scale from 1-10"
+               style="-fx-font-size:18 "
+        />
+        <Slider fx:id="moodSlider"
+                blockIncrement="1.0"
+                cache="true"
+                majorTickUnit="1.0"
+                max="10.0"
+                min="1.0"
+                minorTickCount="0"
+                showTickLabels="true"
+                showTickMarks="true"
+                snapToTicks="true"
+                value="1.0"
+                maxWidth="500"
+        />
+    </VBox>
+
+    <HBox>
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
+            <Label  text="How are you feeling today?"
+                    style="-fx-font-size:18"/>
+            <TextArea fx:id="feelingsTextArea"
+                      wrapText="true"
+                      style="-fx-font-size:14"
+
+                      maxHeight="400"
+
+            />
+            <!--
+            <Button fx:id="Submit" text = "Submit!" onAction="#onHelloButtonClick"/>
+            -->
+            <!--
+            <Button fx:id="Resubmit" text = "Resubmit!" onAction="#ResubmitButtonClick"/>
+            -->
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding:30">
+            <Label text="What emotions did you feel today?"
+                   style="-fx-font-size:18"/>
+            <TextArea fx:id="emotionsTextArea"
+                      wrapText="true"
+                      style="-fx-font-size:14"
+
+                      maxHeight="400"
+            />
+            <!--
+            <Button fx:id="Submit2" text = "Submit!" onAction="#onSubmitButtonClick"/>
+            -->
+            <!--
+            <Button fx:id="Resubmit2"  text = "Resubmit!" onAction="#onResubmitButtonClick"/>
+            -->
+        </VBox>
+
+
+
+    </HBox>
+    <VBox alignment="CENTER" spacing="15" style="-fx-padding:30" >
+
+        <Button fx:id="submitButton" text = "Submit!" onAction="#onSubmitButtonClick"/>
+
+    </VBox>
+
+
+</VBox>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<VBox fx:controller="com.example.src.EntryController" xmlns="http://javafx.com/fxml" xmlns:fx="http://javafx.com/fxml"
+      style="-fx-background-color:#d6d6b0; -fx-padding: 10;">
+
+    <HBox spacing="5">
+        <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+        />
+
+        <Button fx:id="emotionMenu" text="Emotions" onAction="#emotionMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+        />
+
+        <Button fx:id="entryMenu" text="Entries" onAction="#entryMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"
+        />
+
+        <Button fx:id="supportMenu" text="Support" onAction="#supportMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+
+        <Button fx:id="profileMenu" text="Profile" onAction="#profileMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+        <Button fx:id="signOutMenu" text="Sign Out" onAction="#signOutMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+
+    </HBox>
+
+    <Text text="Entries" style="-fx-font-size:24"/>
+
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background-color:#d6d6b0;">
+        <VBox fx:id="entriesList" spacing="10" style="-fx-padding: 10; -fx-background-color:#d6d6b0;">
+            <!-- Entries will be dynamically added below-->
+        </VBox>
+    </ScrollPane>
+
+
+
+
+
+
+
+</VBox>

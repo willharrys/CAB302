@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="com.example.src.ProfileController"
+      xmlns:fx="http://javafx.com/fxml"
+      style="-fx-background-color: #d6d6b0;">
+
+
+    <HBox spacing="5" style="-fx-padding: 10;">
+        <Button fx:id="homeMenu" text="Home" onAction="#homeMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button fx:id="emotionMenu" text="Emotions" onAction="#emotionMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button fx:id="entryMenu" text="Entries" onAction="#entryMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button fx:id="supportMenu" text="Support" onAction="#supportMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button fx:id="profileMenu" text="Profile" onAction="#profileMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button fx:id="signOutMenu" text="Sign Out" onAction="#signOutMenuClick"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+    </HBox>
+
+
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+        <Label text="Update Profile" style="-fx-font-size: 24px;" />
+        <TextField fx:id="usernameField" promptText="Username" />
+        <PasswordField fx:id="passwordField" promptText="Password" />
+        <TextField fx:id="nameField" promptText="Name" />
+        <Button text="Update Information" onAction="#handleUpdateAction"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button text="Export Entries" onAction="#handleExportEntriesAction"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button text="Reset Entries" onAction="#handleResetEntriesAction"
+                style="-fx-background-color: #5ca758; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Button text="Delete Account" onAction="#handleDeleteAction"
+                style="-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 5; -fx-min-width: 100px; -fx-min-height: 30px;"/>
+        <Label fx:id="messageLabel" text="" style="-fx-text-fill: #d32f2f; -fx-font-size: 16px;"/>
+    </VBox>
+</VBox>

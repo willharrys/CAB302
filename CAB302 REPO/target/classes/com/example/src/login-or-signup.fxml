@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.src.StartController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+    <!-- Welcome text -->
+    <Label text="Welcome!" alignment="CENTER" style="-fx-font-size: 48px;"/>
+    <!-- Login Button -->
+    <Button text="Login" fx:id="loginButton" onAction="#handleLogin" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #c4d6b0; -fx-text-fill: #767f66; -fx-background-radius: 5;"/>
+    <!-- Sign Up Button -->
+    <Button text="Sign Up" fx:id="signUpButton" onAction="#handleSignUp" maxWidth="Infinity" prefHeight="200.0" style="-fx-font-size: 34px; -fx-background-color: #d6d6b0; -fx-text-fill: #767f66; -fx-background-radius: 5;"/>
+    <!-- Forgot Password Button -->
+    <Button text="Forgot Your Password?" fx:id="forgotPasswordButton" maxWidth="266" style="-fx-font-size: 14px;"/>
+</VBox>
